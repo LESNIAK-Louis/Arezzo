@@ -1,0 +1,83 @@
+#menu{
+    -fx-pref-height: 27;
+    -fx-pref-width: 204;
+}
+
+#melodie-vbox{
+    -fx-pref-height: 373;
+    -fx-pref-width: 1000;
+    -fx-alignment: center;
+}
+
+#melodie-scroll{
+    -fx-pref-height: 340;
+    -fx-pref-width: 900;
+}
+
+#button-note{
+    -fx-pref-height: 150;
+    -fx-pref-width: 100;
+    -fx-max-width:100;
+}
+
+#pdc-hbox{
+    -fx-pref-height: 350;
+    -fx-pref-width: 1000;
+}
+
+#pdc-clavier{
+    -fx-pref-height: 350;
+    -fx-pref-width: 320;
+}
+
+#button-black{
+    -fx-background-color: #000000;
+    -fx-pref-height: 150;
+    -fx-pref-width: 30;
+}
+
+#button-white{
+    -fx-background-color: #FFFFFF;
+    -fx-pref-height: 250;
+    -fx-pref-width: 40;
+    -fx-border-color : gray;
+}
+
+#button-chut{
+    -fx-pref-width: 280;
+    -fx-alignment: center;
+}
+
+#pdc-partition{
+    -fx-pref-height: 150;
+    -fx-pref-width: 650;
+    -fx-alignment: center;
+}
+
+#button-play{
+
+}
+
+#volume{
+-fx-alignment: center;
+}
+
+#volume-slider{
+    -fx-pref-height: 30;
+    -fx-pref-width: 300;
+    -fx-alignment: center;
+}
+
+#tempo{
+-fx-alignment: center;
+}
+
+#tempo-slider{
+    -fx-pref-height: 30;
+    -fx-pref-width: 300;
+    -fx-alignment: center;
+}
+
+#instrument{
+-fx-alignment: center;
+}

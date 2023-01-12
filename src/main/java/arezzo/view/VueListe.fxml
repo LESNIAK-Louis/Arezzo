@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arezzo.whatever.ListeW">
+   <children>
+      <ListView fx:id="listNotes" prefHeight="500.0" prefWidth="300.0" AnchorPane.rightAnchor="0.0">
+         <contextMenu>
+            <ContextMenu fx:id="contextMenu" />
+         </contextMenu></ListView>
+   </children>
+</AnchorPane>

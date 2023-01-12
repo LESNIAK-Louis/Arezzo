@@ -1,0 +1,265 @@
+@startuml
+interface Iterable<Note>
+interface Observateur
+{
++ {abstract} void reagir()
+}
+interface Initializable
+class Partition{}
+
+package "model" #DDDDDD {
+
+class Note{
+- Duree duree
+- Octave octave
+- Notes note
+- String notationABC
++ Note()
++ Note(Duree duree, Octave octave, Notes note)
++ void initializeNote(Duree duree, Octave octave, Notes note)
++ Image getImage()
++ String getNotationFr()
++ void changeToSilence()
++ void transposer(int nbDemiTon)
++ boolean isSeparation()
++ boolean isSilence()
++ boolean isNote()
+}
+
+class Melodie{
+- boolean alreadySaved
+- String titre
+- int tempo
+- double volume
+- int mesurex2
++ Melodie()
++ boolean isAlreadySaved()
++ String getMelodie()
++ void setMesurex2(int mesurex2)
++ void updateMelodie()
+- void checkTempsValide(String type)
+- void checkSeparation()
++ void ajouterNote(Notes note) throws TempsException
++ void ajouterSilence() throws TempsException
++ void supprimerSilencesFin()
++ void transposerMelodie(int nbDemiTon)
++ void transposerNote(Note n, int nbDemiTon)
++ void jouerNote(String note)
++ void jouerPartition()
++ void ajouterObservateur(Observateur o)
++ void notifierObservateurs()
++ void initMelodie()
++ void sauvegarderMelodie(File fichier)
++ void chargerMelodie(File fichier) throws FichierException
++ Iterator<Note> iterator()
+}
+
+Melodie -"*" Note
+Observateur "*"----- Melodie
+Iterable <.. Melodie
+Partition "1"-- Melodie
+
+}
+
+package "enumerations" #DDDDDD {
+
+enum Duree{
+CROCHE
+NOIRE
+BLANCHE
+RONDE
+==
+- String duree
+--
+- Duree(String duree)
++ String getDuree()
++ int getDureex2()
+}
+
+enum Instrument{
+PIANO
+GUITARE
+SAXOPHONE
+TROMPETTE
+==
+- String instrument
+--
+- Instrument(String instrument)
++ String getInstrument()
+}
+
+enum Notes{
+DO
+DO_NOIR
+RE
+RE_NOIR
+MI
+FA
+FA_NOIR
+SOL
+SOL_NOIR
+LA
+LA_NOIR
+SI
+==
+- {static} Notes[] tabNotes
+- String note
+- Notes(String note)
+---
++ String getNote()
++ Notes[] getNotes()
+}
+
+enum Octave{
+GRAVE
+MEDIUM
+AIGU
+==
+- int octave
+--
+- Octave(int octave)
++ int getOctave()
+}
+
+enum Silence{
+DEMI_SOUPIR
+SOUPIR
+DEMI_PAUSE
+DEMI_PAUSE_POINTEE
+PAUSE
+==
+- String silence
+--
+- Silence(String silence)
++ String getSilence()
+}
+
+
+Melodie -----"1" Octave
+Melodie -----"1" Notes
+Melodie -----"1" Duree
+Melodie -----"1" Instrument
+
+Note -----"1" Octave
+Note -----"1" Notes
+Note -----"1" Duree
+
+}
+
+
+package "exceptions" #DDDDDD {
+class ArezzoException{
++ ArezzoException(String msg)
++ void afficherAlerte()
+}
+
+class FichierException{
++ FichierException(String msg)
+}
+
+class InputException{
++ InputException(String msg)
+}
+
+class TempsException{
++ TempsException(String msg)
+}
+
+ArezzoException <|-- FichierException
+ArezzoException <|-- InputException
+ArezzoException <|-- TempsException
+}
+
+
+package "whatever" #DDDDDD {
+class ListeW{
+- ListView<HBox> listNotes
+- ContextMenu contextMenu
++ ListeW(Melodie melodie)
++ void initialize(URL location, ResourceBundle resources)
++ void effacer()
++ void monter()
++ void descendre()
++ void reagir()
+}
+
+class MelodieW{
+- ScrollPane melodiePane
+- Label titreMelodie
+- Button bouttonListeNotes
+- Stage listeNotes
++ MelodieW(Melodie melodie)
++ void initialize(URL url, ResourceBundle resourceBundle)
+- void rotateImg()
++ void ouvrirListeNotes()
++ void reagir()
+}
+
+class MenuW{
+- Stage stage
++ MenuW(Melodie melodie, Stage stage)
++ void nouvelleMelodie()
++ void chargerMelodie()
++ boolean sauvegarderMelodie()
++ void quitter()
++ void renommerMelodie()
++ void transposerMelodie()
++ String createDialog(String titre, String askFor, boolean entier) throws InputException
++ boolean confirmation(String msg)
++ File chooseFile(boolean load) throws FichierException
+}
+
+class PanneauDeControleW{
+- Button nDo, doNoir, nRe, reNoir, nMi, nFa, faNoir, nSol, solNoir, nLa, laNoir, nSi
+- Button chut
+- RadioButton aigu, medium, grave
+- RadioButton ronde, blanche, noire, croche
+- RadioButton piano, guitare, saxophone, trompette
+- Slider tempo, volume
+- Button play
++ PanneauDeControleW(Melodie melodie)
++ void ajouterDo()
++ void ajouterDoNoir()
++ void ajouterRe()
++ void ajouterReNoir()
++ void ajouterMi()
++ void ajouterFa()
++ void ajouterFaNoir()
++ void ajouterSol()
++ void ajouterSolNoir()
++ void ajouterLa()
++ void ajouterLaNoir()
++ void ajouterSi()
++ void chut()
++ void octaveAigu()
++ void octaveMedium()
++ void octaveGrave()
++ void instrumentPiano()
++ void instrumentGuitare()
++ void instrumentSaxophone()
++ void instrumentTrompette()
++ void dureeRonde()
++ void dureeCroche()
++ void dureeBlanche()
++ void dureeNoire()
++ void tempo()
++ void volume()
++ void play()
++ void reagir()
+}
+
+ListeW ..> Observateur
+Initializable <.. ListeW
+ListeW --"1" Melodie
+
+
+MelodieW ..> Observateur
+Initializable <.. MelodieW
+MelodieW --"1" Melodie
+
+MenuW --"1" Melodie
+
+PanneauDeControleW ..> Observateur
+PanneauDeControleW --"1" Melodie
+}
+@enduml

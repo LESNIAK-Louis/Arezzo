@@ -11,7 +11,7 @@ Logiciel de composition et de lecture de partitions élémentaires de musique.
 
 ![Aperçu du logiciel](apercu.png)
 
-## Dépendances
+## Dépendance
 
 - OS : Ubuntu 20.04
 
